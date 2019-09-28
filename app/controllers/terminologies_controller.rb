@@ -1,5 +1,5 @@
 class TerminologiesController < ApplicationController
-  def home
+  def index
     render json: { status: "it's working!" }
   end
 end

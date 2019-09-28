@@ -1,3 +1,4 @@
 Rails.application.routes.draw do
-  root to: "terminologies#home"
+  root "terminologies#index"
+  resources :terminologies
 end
