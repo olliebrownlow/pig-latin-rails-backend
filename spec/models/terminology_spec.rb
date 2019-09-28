@@ -24,6 +24,18 @@ RSpec.describe Terminology, type: :model do
           expect(terminology.translate("strychnine")).to eq("inestrychnay")
         end
       end
+
+      context 'and the word starts with a vowel' do
+        it 'returns the word followed by "ay"' do
+          expect(terminology.translate("assessment")).to eq("assessmentay")
+        end
+      end
+
+      context 'and the word has no vowels' do
+        it 'returns the last letter followed by the rest of the word and "ay"' do
+          expect(terminology.translate("rhythm")).to eq("mrhythay")
+        end
+      end
     end
   end
 end
