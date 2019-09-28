@@ -1,16 +1,23 @@
 class Terminology < ApplicationRecord
 
   def translate(terminology)
-    first_vowel_index = terminology.index(/[aeiou]/)
-
-    if first_vowel_index
-      transform_words_with_vowels(terminology, first_vowel_index)
-    else
-      transform_words_without_vowels(terminology)
-    end
+    words = terminology.downcase.gsub(/[^a-z0-9\s]/i, '').split(' ')
+    words.map { |word|
+      translation = translation(word)
+    }.join(" ")
   end
 
   private
+
+  def translation(word)
+    first_vowel_index = word.index(/[aeiou]/)
+
+    if first_vowel_index
+      translation = transform_words_with_vowels(word, first_vowel_index)
+    else
+      translation = transform_words_without_vowels(word)
+    end
+  end
 
   def transform_words_with_vowels(terminology, first_vowel_index)
     leading_consonants = terminology[0...first_vowel_index]
