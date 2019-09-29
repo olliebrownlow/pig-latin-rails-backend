@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'posting a terminology', :type => :request do
-  before do
+  before(:each) do
     post '/terminologies', params: { :english => 'risk' }
   end
 

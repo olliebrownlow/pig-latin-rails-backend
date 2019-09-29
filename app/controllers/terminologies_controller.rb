@@ -31,6 +31,36 @@ class TerminologiesController < ApplicationController
     end
   end
 
+  def destroy
+    terminology = Terminology.find(params[:id])
+    terminology.destroy
+    render json: {
+      status: :successful,
+      result: :deleted,
+      terminology: terminology
+    }
+  end
+
+  def update
+    terminology = Terminology.find(params[:id])
+    terminology.update(terminology_params)
+    terminology["pig_latin"] = terminology.translate(terminology["english"])
+    if terminology.update(terminology_params)
+      render json: {
+        status: :successful,
+        result: :updated,
+        terminology: terminology
+      }
+    else
+      original = Terminology.find(params[:id])
+      render json: {
+        status: :unsuccessful,
+        result: :no_change,
+        reason: :already_stored,
+        terminology: original
+      }
+    end
+  end
 
   private
 
