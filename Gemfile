@@ -34,6 +34,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
   gem 'simplecov'
   gem 'simplecov-console'
+  gem 'database_cleaner'
 end
 
 group :development do

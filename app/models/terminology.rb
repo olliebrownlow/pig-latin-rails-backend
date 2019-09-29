@@ -1,4 +1,6 @@
 class Terminology < ApplicationRecord
+  validates_presence_of :english, :pig_latin
+  validates_uniqueness_of :english
 
   def translate(terminology)
     words = terminology.downcase.gsub(/[^a-z0-9\s]/i, '').split(' ')
@@ -19,15 +21,15 @@ class Terminology < ApplicationRecord
     end
   end
 
-  def transform_words_with_vowels(terminology, first_vowel_index)
-    leading_consonants = terminology[0...first_vowel_index]
-    following_letters = terminology[(first_vowel_index)..(terminology.length - 1)]
+  def transform_words_with_vowels(word, first_vowel_index)
+    leading_consonants = word[0...first_vowel_index]
+    following_letters = word[(first_vowel_index)..(word.length - 1)]
     following_letters + leading_consonants + "ay"
   end
 
-  def transform_words_without_vowels(terminology)
-    last_letter = terminology[-1]
-    first_letters = terminology[0..(terminology.length - 2)]
+  def transform_words_without_vowels(word)
+    last_letter = word[-1]
+    first_letters = word[0..(word.length - 2)]
     last_letter + first_letters + "ay"
   end
 end
