@@ -9,16 +9,17 @@ class TerminologiesController < ApplicationController
       terminology = Terminology.new(terminology_params)
       terminology["pig_latin"] = terminology.translate(terminology["english"])
 
-      if terminology.save
-        render json: {
-          status: :successful,
-          result: :stored,
-          terminology: terminology
-        }
-      elsif Terminology.all.includes_values=(terminology.english)
+
+      if Terminology.all.includes_values=(terminology.pig_latin)
         render json: {
           status: :successful,
           result: :already_stored,
+          terminology: terminology
+        }
+      elsif terminology.save
+        render json: {
+          status: :successful,
+          result: :stored,
           terminology: terminology
         }
       end
