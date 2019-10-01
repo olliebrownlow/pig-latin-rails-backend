@@ -41,7 +41,7 @@ describe 'posting a terminology', :type => :request do
   end
 end
 
-describe 'failed posting of a terminology', :type => :request do
+describe 'fails to post terminology', :type => :request do
   before do
     post '/terminologies', params: { :english => nil }
   end
@@ -49,6 +49,7 @@ describe 'failed posting of a terminology', :type => :request do
   it 'returns a status of "error"' do
     expect(JSON.parse(response.body)['status']).to eq("error")
   end
+
   it 'returns a result of "not_stored"' do
     expect(JSON.parse(response.body)['result']).to eq("not_stored")
   end
