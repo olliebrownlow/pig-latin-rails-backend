@@ -7,11 +7,10 @@ class TerminologiesController < ApplicationController
   def create
     terminology = Terminology.new(terminology_params)
     if terminology_params[:english] != nil
-      terminology["english"].downcase!
       terminology["pig_latin"] = terminology.translate(terminology["english"])
     end
 
-    if terminology_params[:english] == nil
+    if terminology_params[:english] == ''
       render json: {
         status: :error,
         result: :not_stored,
@@ -51,7 +50,6 @@ class TerminologiesController < ApplicationController
 
   def update
     terminology = Terminology.find(params[:id])
-    terminology["english"].downcase!
     terminology.update(terminology_params)
     terminology["pig_latin"] = terminology.translate(terminology["english"])
     if terminology.update(terminology_params)

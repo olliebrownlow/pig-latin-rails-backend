@@ -43,7 +43,7 @@ end
 
 describe 'fails to post terminology', :type => :request do
   before do
-    post '/terminologies', params: { :english => nil }
+    post '/terminologies', params: { :english => '' }
   end
 
   it 'returns a status of "error"' do
