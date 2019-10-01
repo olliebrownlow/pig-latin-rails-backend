@@ -5,24 +5,22 @@ class TerminologiesController < ApplicationController
   end
 
   def create
-    if terminology_params['english']
-      terminology = Terminology.new(terminology_params)
-      terminology["pig_latin"] = terminology.translate(terminology["english"])
+    terminology = Terminology.new(terminology_params)
+    terminology["pig_latin"] = terminology.translate(terminology["english"])
 
-
-      if Terminology.all.includes_values=(terminology.pig_latin)
-        render json: {
-          status: :successful,
-          result: :already_stored,
-          terminology: terminology
-        }
-      elsif terminology.save
-        render json: {
-          status: :successful,
-          result: :stored,
-          terminology: terminology
-        }
-      end
+    if Terminology.where(:pig_latin => terminology.pig_latin).blank?
+      terminology.save
+      render json: {
+        status: :successful,
+        result: :stored,
+        terminology: terminology
+      }
+    elsif !Terminology.where(:pig_latin => terminology.pig_latin).blank?
+      render json: {
+        status: :successful,
+        result: :already_stored,
+        terminology: terminology
+      }
     else
       render json: {
         status: :error,
