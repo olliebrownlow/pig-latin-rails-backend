@@ -1,6 +1,6 @@
 # English to Pig Latin translation service (backend)
 
-Single-page, web app with CRUD functionality created using a [React.js frontend](https://github.com/olliebrownlow/pig-latin-react-frontend) and rails backend. On the translator view the app allows a user to translate into Pig Latin any phrase they wish. A button takes the user to a history of their translations where they can delete and update individual entries as well as sort and search through them.
+Single-page, web app with CRUD functionality created using a [React.js frontend](https://github.com/olliebrownlow/pig-latin-react-frontend) and rails backend. In the translator view the app allows a user to translate into Pig Latin any phrase they wish. A button takes the user to a history of their translations where they can delete and update individual entries as well as sort and search through them.
 
 ### Getting started
 
@@ -18,11 +18,9 @@ The frontend is available [here](https://github.com/olliebrownlow/pig-latin-reac
 
 ### Code design
 
-The terminology controller implements full CRUD functionality and communicates with the Terminology class and PostgreSQL via Active Record to translate the English term into Pig Latin before saving to the database.
+The terminology controller implements full CRUD functionality and communicates with the Terminology class and PostgreSQL via Active Record to translate the English term into Pig Latin before saving to the database. Requests receive responses in JSON format.
 
-I have leveraged the fact that the model returns a downcase translation by using it to avoid multiple entries into the database of the same terminology (even if receiving different versions of the same one, e.g fire, Fire, fIre, FIrE etc.). It does so by checking if there are any records in the db where the Pig Latin version matches the newly supplied entry's Pig Latin translation.
-
-### Business logic
+#### Business logic
 
 The model takes an English word or phrase as input and returns that word or phrase in lowercase Pig Latin.
 
@@ -30,16 +28,19 @@ It removes any undesired characters and creates an array where the elements are 
 
 ### Testing
 
-From the root directory, run `rspec`. The coverage is currently 97.82%
+From the root directory, run `rspec`. The coverage is currently 98.20%
 
 ### Edge cases
 
-- Edge cases are dealt with in the frontend by restricting what can be sent in axios requests.
+- As there is a uniqueness validation for the English parameter set in the model, the same phrase cannot be stored twice. This keeps the db de-cluttered but means that in the create and update methods something still needs returning so that the user can happily submit already saved phrases for instant translating.
+- Most other edge cases are dealt with in the frontend by restricting what can be sent in axios PUT and POST requests. These edge cases are described in the [frontend README](https://github.com/olliebrownlow/pig-latin-react-frontend/blob/master/README.md).
 
 ### If I could start over..
 
-The implementation neglects to categorise the inputted terminology into relevant categories (Health & Safety, Hazardous Substances etc.). If I were to start over I would build in these options with a dropdown select menu next to each term inputted. The select menu would allow the user to specify a category. This could then be sent in POST and PUT requests requiring another column in the database (relative to the current implementation). This data could be used to make, for example, multiple searchable tables, one for each category, and perhaps also a joint table showing all saved items.
+The implementation neglects to organise the inputted terminology into relevant categories (Health & Safety, Hazardous Substances etc.). If I were to start over I would build in these options with a dropdown select menu next to each term inputted. The select menu would allow the user to specify a category with each phrase they want to translate. This could then be sent in POST and PUT requests requiring another column in the database (relative to the current implementation). This data could be used to make, for example, multiple searchable tables, one for each category, and also a joint table showing all saved items. I might also look at translating into [Egg Latinj](https://www.youtube.com/watch?v=5Vb98a6lUjc) for which the rules are easier but the result more comic!
 
 ### Screenshot
+
+Backend database:
 
 ![app](./public/jsonbackenddata.PNG)

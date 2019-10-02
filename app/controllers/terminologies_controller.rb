@@ -41,7 +41,6 @@ class TerminologiesController < ApplicationController
 
   def update
     terminology = Terminology.find(params[:id])
-    terminology.update(terminology_params)
     terminology["pig_latin"] = terminology.translate(terminology["english"])
     if terminology.update(terminology_params)
       render json: {
