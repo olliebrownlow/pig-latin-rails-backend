@@ -14,6 +14,12 @@ class TerminologiesController < ApplicationController
         result: :stored,
         terminology: terminology
       }
+    elsif !Terminology.where(:pig_latin => terminology.pig_latin).blank?
+      render json: {
+        status: :successful,
+        result: :already_stored,
+        terminology: terminology
+      }
     else
       render json: {
         status: :error,
