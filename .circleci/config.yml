@@ -32,7 +32,7 @@ jobs:
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
 
-      - run: rails server --port=3001
+      - run: bin/rails server --port=3001
 
       - save_cache:
           paths:
