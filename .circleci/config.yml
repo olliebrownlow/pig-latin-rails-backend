@@ -33,7 +33,7 @@ jobs:
             bundle install --jobs=4 --retry=3 --path vendor/bundle
       - run:
           name: Boot rails server
-          command: bin/rails server --port=3001
+          command: bundle exec rails server --port=3001
           background: true
 
       - save_cache:
