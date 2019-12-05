@@ -11,7 +11,6 @@ jobs:
       - image: circleci/postgres:10
         environment:
           POSTGRES_USER: circleci
-          POSTGRES_DB: pig_latin_backend_development
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
