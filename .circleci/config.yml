@@ -50,4 +50,4 @@ jobs:
       # run tests!
       - run:
           name: run tests
-          command: rspec
+          command: bundle exec rspec
