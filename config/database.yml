@@ -57,7 +57,7 @@ development:
 test:
   <<: *default
   database: pig_latin_backend_test
-  host:
+  host: <%= ENV['MYAPP_DATABASE_HOST'] || 'localhost' %>
   port: 5432
 
 # As with config/credentials.yml, you never want to store sensitive information,
