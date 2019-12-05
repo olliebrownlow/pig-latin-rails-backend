@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/olliebrownlow/pig-latin-rails-backend.svg?style=shield)](https://circleci.com/gh/olliebrownlow/pig-latin-rails-backend)
+
 # English to Pig Latin translation service (backend)
 
 Single-page, web app with CRUD functionality created using a [React.js frontend](https://github.com/olliebrownlow/pig-latin-react-frontend) and rails backend. In the translator view the app allows a user to translate into Pig Latin any phrase they wish. A button takes the user to a history of their translations where they can delete and update individual entries as well as sort and search through them.
