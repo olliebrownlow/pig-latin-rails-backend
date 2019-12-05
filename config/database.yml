@@ -82,5 +82,6 @@ test:
 production:
   <<: *default
   database: pig_latin_backend_production
+  adapter: postgresql
   username: pig_latin_backend
   password: <%= ENV['PIG_LATIN_BACKEND_DATABASE_PASSWORD'] %>
