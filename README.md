@@ -4,6 +4,10 @@
 
 Single-page, web app with CRUD functionality created using a [React.js frontend](https://github.com/olliebrownlow/pig-latin-react-frontend) and rails backend. In the translator view the app allows a user to translate into Pig Latin any phrase they wish. A button takes the user to a history of their translations where they can delete and update individual entries as well as sort and search through them.
 
+### Deployment on Heroku
+
+Go [here](https://piglatin-backend.herokuapp.com/).
+
 ### Getting started
 
 Clone the repo, navigate to the root directory and run `bundle install` to install the gems. Run `rails server --port=3001` to start it in development mode (localhost:3001). The react frontend can be started on port 3000.
